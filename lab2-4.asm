@@ -1,14 +1,12 @@
-# Title:
-
-# Author:
-
-# Date:
-
+# Title: Lab 2.4 - Compare two registers
+# Author: Tristan Jadman
+# Date: September 28, 2025
 # Description:
+# This program reads two integers from the user.
+# If they are equal, it prints "equal". Otherwise, it prints "not equal".
 
-# Input:
-
-# Output:
+# Input: Two integer value
+# Output: equal or not equal based on the two integer
 
 ################### Data segment #####################
 
