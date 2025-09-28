@@ -3,10 +3,9 @@
 # Date: September 28, 2025
 # Description:
 # This program asks the user for an integer, doubles it using 'add',
-# prints the result, and asks if the user wants to repeat.
-# If the user enters 'y', the program repeats and moves to the next line.
+# prints the result
 
-# Input:  An integer and a character ('y' or 'n').
+# Input:  An integer.
 # Output: The doubled value of that integer.
 
 ################### Data segment #####################
@@ -14,8 +13,7 @@
 .data
 str1:   .asciiz "Enter an integer: "
 str2:   .asciiz "The doubled value is: "
-newline:  .asciiz "\n"
-repeatQ:  .asciiz "\nRepeat [y/n]? "
+
  . . .
 
 ################### Code segment #####################
@@ -47,30 +45,9 @@ main:				# main function entry
 	move	$a0,	$t1
 	syscall
 	
-	#print newline
-	li	$v0,	4
-	la	$a0,	newline
-	syscall
-	
-	#ask to repeat
-	li	$v0,	4
-	la	$a0,	repeatQ
-	syscall
-	
-	li	$v0,	12
-	syscall
-	
-	li	$t2,	'y'
-	beq	$v0, $t2, do_repeat
-	
+
  . . .
 
 li $v0, 10 
 
 syscall				# system call to exit program
-
-do_repeat:
-	li	$v0,	4
-	la	$a0,	newline
-	syscall
-	j main

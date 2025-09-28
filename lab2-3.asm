@@ -1,21 +1,19 @@
-# Title: Lab 2.3 - Compute s = (a + b) - (c + 101)
+# Title: Lab 2.2 - Hello Name Program
 # Author: Tristan Jadman
 # Date: September 28, 2025
 # Description:
-# This program reads three integers (a, b, c) from the user,
-# then computes s = (a + b) - (c + 101), and prints the result.
+# This program asks the user to enter their name, then prints "Hello "
+# followed by the entered name.
 
-# Input:  Integer value of a, b , and c.
-# Output: Computation of s = (a + b) - (c + 101)"
+# Input:  A string (name) from the user.
+# Output: Prints "Hello <name>"
 
 ################### Data segment #####################
 
 .data
-promptA:	.asciiz "Enter value for a: "
-promptB:	.asciiz "Enter value for b: "
-promptC:	.asciiz "Enter value for c: "
-result:		.asciiz "Result (s): "
-newline:	.asciiz "\n"
+str1:	.asciiz "Enter your name: "
+str2:	.asciiz	"Hello "
+name:	.space 32	#reserve 32 bytes for name input
  . . .
 
 ################### Code segment #####################
@@ -25,49 +23,25 @@ newline:	.asciiz "\n"
 .globl main
 
 main:				# main function entry
-	#a
+	#prompt user
 	li	$v0,	4
-	la	$a0,	promptA
+	la	$a0,	str1
 	syscall
 	
-	li	$v0,	5
+	#read string (syscall 8)
+	li	$v0,	8
+	la	$a0,	name
+	li	$a1,	32
 	syscall
-	move	$t0,	$v0
 	
-	#b
+	#print "Hello "
 	li	$v0,	4
-	la	$a0,	promptB
+	la	$a0,	str2
 	syscall
 	
-	li	$v0,	5
-	syscall
-	move	$t1,	$v0
-	
-	#c
+	#print name
 	li	$v0,	4
-	la	$a0,	promptC
-	syscall
-	
-	li	$v0,	5
-	syscall
-	move	$t2,	$v0
-	
-	# s= (a + b) - (c + 101) 
-	add	$t3, $t0, $t1	#t3 = a + b
-	addi	$t4, $t2, 101	#t4 = c + 101
-	sub	$t5, $t3, $t4	#t5 = t3 + t4
-	
-	#print result message
-	li	$v0,	4
-	la	$a0, result
-	syscall
-	
-	li	$v0,	1
-	move	$a0,	$t5
-	syscall
-	
-	li	$v0,	4
-	la	$a0,	newline
+	la	$a0,	name
 	syscall
 
  . . .
